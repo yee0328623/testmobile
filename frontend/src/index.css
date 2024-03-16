@@ -76,7 +76,6 @@ span {
 
 ul,
 ol {
-  padding: 0.2em;
   list-style-type: none;
   display: flex;
   width: 100%;
@@ -84,7 +83,6 @@ ol {
 
 li {
   font-size: 1rem;
-  padding: 0.2em 0;
 }
 
 table {
@@ -95,6 +93,7 @@ table {
 th,
 td {
   padding: 0.5em;
+  text-align: left;
   border: 1px solid #ddd;
 }
 
@@ -112,7 +111,6 @@ ul {
   list-style-type: none;
   display: flex;
   width: 100%;
-  /* overflow: hidden; */
 }
 
 button {
@@ -135,8 +133,6 @@ textarea {
 }
 
 section {
-  padding: 1em;
-  margin: 0 auto;
   height: 100%;
 }
 
@@ -160,12 +156,13 @@ a {
   width: 90%;
   max-width: 60em;
   margin: 0 auto;
+  display: flex;
 }
-
+/* 
 .col {
   float: left;
   width: 50%;
-}
+} */
 
 .clearfix::after {
   content: "";
