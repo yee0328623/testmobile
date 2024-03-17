@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import "./Panel.css";
 import axios from 'axios';
 
-const Panel = ({ openPanel, selectedClient, deviceList, selectedDeviceData, setSelectedDeviceData }) => {
+const Panel = ({ selectedClient, selectedDeviceData, setSelectedDeviceData, deviceList }) => {
 
   const drawImagesOnCanvas = (canvasData) => {
     const canvas = document.getElementById('myCanvas');
@@ -51,7 +51,6 @@ const Panel = ({ openPanel, selectedClient, deviceList, selectedDeviceData, setS
         const response = await axios.get(`http://127.0.0.1:8000/api/${selectedClient}/getDeviceData/${selectedDevice.device_type}/${selectedDevice.index}`);
         setSelectedDeviceData(response.data);
         console.log("Canvus data: ", response.data.canvus);
-        openPanel();
       } catch (error) {
         console.error('Error fetching device data:', error);
       }

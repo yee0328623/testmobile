@@ -82,24 +82,15 @@ const MapPage = () => {
     setIsOpen(!isOpen);
   };
 
-  const [isOpenPanel, setIsOpenPanel] = useState(true);
-  const closePanel = () => {
-    setIsOpenPanel(false);
-  };
-
-  const openPanel = () => {
-    setIsOpenPanel(true);
-  };
-
   return (
     <div>
       <section>
-        <Navbar isOpen={isOpen} toggleNavbar={toggleNavbar} closePanel={closePanel} openPanel={openPanel} isOpenPanel={isOpenPanel} handleClientSelection={handleClientSelection} clientsByCounty={clientsByCounty}/>
+        <Navbar isOpen={isOpen} toggleNavbar={toggleNavbar} handleClientSelection={handleClientSelection} clientsByCounty={clientsByCounty}/>
       </section>
       <section>
         <div className='map-container'>
-          <MapComponent clients={clients} openPanel={openPanel} isOpenPanel={isOpenPanel} handleClientSelection={handleClientSelection} selectedClientLocation={selectedClientLocation} setSelectedClientLocation={setSelectedClientLocation} selectedClientData={selectedClientData} />
-          <Panel isOpen={isOpen} toggleNavbar={toggleNavbar} closePanel={closePanel} openPanel={openPanel} isOpenPanel={isOpenPanel} selectedClient={selectedClient} setSelectedDeviceData={setSelectedDeviceData} selectedDeviceData={selectedDeviceData} deviceList={deviceList.device_list || []}/>
+          <MapComponent clients={clients} handleClientSelection={handleClientSelection} selectedClientLocation={selectedClientLocation} setSelectedClientLocation={setSelectedClientLocation} selectedClientData={selectedClientData} />
+          <Panel selectedClient={selectedClient} setSelectedDeviceData={setSelectedDeviceData} selectedDeviceData={selectedDeviceData} deviceList={deviceList.device_list || []}/>
         </div>
       </section>
     </div>

@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import "./Navbar.css";
 import '../index.css';
 
-const Navbar = ({ isOpen, toggleNavbar, openPanel, handleClientSelection, clientsByCounty}) => {
+const Navbar = ({ isOpen, toggleNavbar, handleClientSelection, clientsByCounty}) => {
   const [activeItem, setActiveItem] = useState(null);
 
   const handleNavItemClick = (county) => {
@@ -51,7 +51,6 @@ return (
             <DropdownList
               clients={clientsByCounty[county]}
               toggleNavbar={toggleNavbar}
-              openPanel={openPanel}
               handleClientSelection={handleClientSelection}
             />
           ) : null}
@@ -62,7 +61,7 @@ return (
 );
 };
 
-const DropdownList = ({ clients, toggleNavbar, openPanel, handleClientSelection }) => {
+const DropdownList = ({ clients, toggleNavbar, handleClientSelection }) => {
 const props = useSpring({
   from: { opacity: 0, height: 0 },
   to: { opacity: 1, height: clients.length * 50 },
@@ -78,7 +77,6 @@ return (
           className="dropdown-link"
           onClick={() => {
             toggleNavbar();
-            openPanel();
             handleClientSelection(clientName);
           }}
         >

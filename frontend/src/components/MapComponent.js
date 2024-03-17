@@ -22,7 +22,7 @@ const clientIcon = (color) => new Icon({
   popupAnchor: [0, -32],
 });
 
-const MapComponent = ({clients, openPanel, handleClientSelection, setSelectedClientLocation, selectedClientLocation, selectedClientData }) => {
+const MapComponent = ({clients, handleClientSelection, setSelectedClientLocation, selectedClientLocation, selectedClientData }) => {
   
   var defaultCenter = [22.642081110582417, 120.33120388762121];
   const center = selectedClientLocation || defaultCenter;
@@ -81,7 +81,7 @@ const MapComponent = ({clients, openPanel, handleClientSelection, setSelectedCli
             {/* <Popup>知訊科技</Popup> */}
           </Marker>
           {clients.map((client, index) => (
-            <Marker key={`${client.id}-${index}`} position={client.location} icon={clientIcon(getClientIcon(client.status))} eventHandlers={{click: () => {openPanel(); handleClientSelection(client.clientName)},}}>
+            <Marker key={`${client.id}-${index}`} position={client.location} icon={clientIcon(getClientIcon(client.status))} eventHandlers={{click: () => { handleClientSelection(client.clientName)},}}>
               <Popup>{getClientPopupContent(client)}</Popup>
             </Marker>
           ))}
