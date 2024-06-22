@@ -1,31 +1,26 @@
-# apt install net-tools
+#!/bin/bash
 
 # Exit if any command fails
 set -e
 
 # Specify the Miniconda version
 MINICONDA_VERSION="latest"
-MINICONDA_SCRIPT="Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh"
+MINICONDA_SCRIPT="Miniconda3-${MINICONDA_VERSION}-Windows-x86_64.exe"
 MINICONDA_URL="https://repo.anaconda.com/miniconda/$MINICONDA_SCRIPT"
 
-# Download the latest shell script
+# Download the latest installer
 wget --quiet $MINICONDA_URL -O $MINICONDA_SCRIPT
 
-# Make the Miniconda installation script executable
-chmod +x $MINICONDA_SCRIPT
-
-# Initialize conda
-# ~/miniconda3/bin/conda init bash
-
-# Run the Miniconda installadtion script in silent mode
-./$MINICONDA_SCRIPT -b
+# Run the Miniconda installation script in silent mode
+./$MINICONDA_SCRIPT /S /D=%USERPROFILE%\Miniconda3
 
 # Clean up the installer script
 rm $MINICONDA_SCRIPT
 
-echo "Miniconda3 installation completed."
+# Initialize conda for Git Bash
+echo "source \$HOME/Miniconda3/Scripts/activate" >> ~/.bashrc
 
-    # bash sudo install.sh
+echo "Miniconda3 installation completed."
 
 # Reinitialize conda. After running this, close your current shell session, reopen Xshell, and try again.
     # ~/miniconda3/bin/conda init
