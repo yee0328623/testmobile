@@ -1,15 +1,10 @@
-#!/bin/bash
-
-# Exit if any command fails
-set -e
-
 # Specify the Miniconda version
 MINICONDA_VERSION="latest"
 MINICONDA_SCRIPT="Miniconda3-${MINICONDA_VERSION}-Windows-x86_64.exe"
 MINICONDA_URL="https://repo.anaconda.com/miniconda/$MINICONDA_SCRIPT"
 
-# Download the latest installer
-wget --quiet $MINICONDA_URL -O $MINICONDA_SCRIPT
+# Download the latest installer using PowerShell
+powershell -Command "Invoke-WebRequest -Uri $MINICONDA_URL -OutFile $MINICONDA_SCRIPT"
 
 # Run the Miniconda installation script in silent mode
 ./$MINICONDA_SCRIPT /S /D=%USERPROFILE%\Miniconda3
