@@ -1,6 +1,7 @@
 import React, { useEffect} from 'react';
 import "./Panel.css";
 import axios from 'axios';
+import {fetchDeviceData} from '../function/useAPI';
 
 const Panel = ({ selectedClient, selectedDeviceData, setSelectedDeviceData, deviceList }) => {
 
@@ -46,13 +47,9 @@ const Panel = ({ selectedClient, selectedDeviceData, setSelectedDeviceData, devi
     const handlePanelSelection = async (deviceName) => {
       const selectedDevice = deviceList.find(device => device.device_name === deviceName);
       if (!selectedDevice) return;
-    
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/${selectedClient}/getDeviceData/${selectedDevice.device_type}/${selectedDevice.index}`);
-        setSelectedDeviceData(response.data);
-        console.log("Canvus data: ", response.data.canvus);
-      } catch (error) {
-        console.error('Error fetching device data:', error);
+      const deviceData = await fetchDeviceData(selectedClient, selectedDevice.device_type, selectedDevice.index);
+      if(deviceData){
+        setSelectedDeviceData(deviceData);
       }
     };
     // const [startDate, setStartDate] = useState(new Date());

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import "./MapPage.css";
 import '../index.css';
+import { fetchClients, fetchDeviceList } from '../function/useAPI';
 
 const MapPage = () => {
   const [selectedClient, setSelectedClient] = useState();
@@ -16,26 +17,23 @@ const MapPage = () => {
   const [selectedClientData, setSelectedClientData] = useState(null);
 
   useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/getClientList');
-        setClients(response.data.client_list);
-        organizeClientsByCounty(response.data.client_list);
-
-        if (response.data.client_list.length > 0) {
-          const firstClient = response.data.client_list[0];
+    const fetchData = async () => {
+      const clientList = await fetchClients();
+      if(clientList){
+        setClients(clientList);
+        organizeClientsByCounty(clientList);
+        if (clientList.length > 0) {
+          const firstClient = clientList[0];
           setSelectedClient(firstClient.clientName);
           setSelectedClientLocation(firstClient.location);
           setSelectedClientData(firstClient);
           setSelectedDeviceData(null);
           fetchDeviceList(firstClient.clientName);
         }
-      } catch (error) {
-        console.error('Error fetching the client list:', error);
       }
     };
 
-    fetchClients();
+    fetchData();
   }, []);
 
   const organizeClientsByCounty = (clients) => {
@@ -51,20 +49,11 @@ const MapPage = () => {
     setClientsByCounty(map);
   };
   
-  const fetchDeviceList = async (clientName) => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/${clientName}/getDeviceList`);
-      // console.log("response",response);
-      setDeviceList(response.data);
-    } catch (error) {
-      console.error('Error fetching the device list:', error);
-    }
-  };
-
-  const handleClientSelection = (clientName) => {
-    const selectedClientData = clients.find(client => client.clientName === clientName);
-    console.log("clients", clients.find(client => client.clientName === clientName));
-    if (selectedClientData) {
+  const handleClientSelection =  async (clientName) => {
+    const deviceListData = await fetchDeviceList(clientName);
+    // const selectedClientData = clients.find(client => client.clientName === clientName);
+    // console.log("clients", clients.find(client => client.clientName === clientName));
+    if (deviceListData) {
       setSelectedClient(selectedClientData.clientName);
       setSelectedClientLocation(selectedClientData.location);
       setSelectedClientData(selectedClientData);
