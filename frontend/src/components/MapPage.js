@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MapComponent from './MapComponent';
 import Panel from './Panel';
 import Navbar from './Navbar';
-import axios from 'axios';
+// import axios from 'axios';
 import "./MapPage.css";
 import '../index.css';
 import { fetchClients, fetchDeviceList } from '../function/useAPI';

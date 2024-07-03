@@ -5,16 +5,15 @@ function encrypt(text, secretKey) {
 }
 const Api=process.env.REACT_APP_API_URL
 // 解密
-function decrypt(ciphertext, secretKey) {
-  const bytes  = CryptoJS.AES.decrypt(ciphertext, secretKey);
-  return bytes.toString(CryptoJS.enc.Utf8);
-}
+// function decrypt(ciphertext, secretKey) {
+//   const bytes  = CryptoJS.AES.decrypt(ciphertext, secretKey);
+//   return bytes.toString(CryptoJS.enc.Utf8);
+// }
 //登入function
 async function login(account) {
   const secretkey = process.env.REACT_APP_SECRET_KEY
   const password =encrypt(account.password, secretkey);
-  console.log(password);
-  //U2FsdGVkX1/T/8WV7UqXydiUvr+dqKrqaVXlMDUDNFA= 加密後的密碼
+  console.log(password)
   try {
       if (!account.account || !account.password) {
         return { error: 'Please fill in both account and password.' };
