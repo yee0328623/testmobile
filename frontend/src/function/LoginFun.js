@@ -3,7 +3,7 @@ const CryptoJS = require('crypto-js');
 function encrypt(text, secretKey) {
   return CryptoJS.AES.encrypt(text, secretKey).toString();
 }
-
+const Api=process.env.REACT_APP_API_URL
 // 解密
 function decrypt(ciphertext, secretKey) {
   const bytes  = CryptoJS.AES.decrypt(ciphertext, secretKey);
@@ -20,7 +20,7 @@ async function login(account) {
         return { error: 'Please fill in both account and password.' };
       }
       
-      const response = await fetch('http://35.185.160.20:5566/api/users/login/', {
+      const response = await fetch(`${Api}/users/login/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
