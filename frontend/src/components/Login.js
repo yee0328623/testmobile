@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'; 
 import axios from 'axios';
-
+const loginURL= process.env.REACT_APP_LOGIN_URL;
 const getCookie = (name) => {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     
@@ -23,14 +23,14 @@ const Login = () => {
 
     try {
         const csrfToken = getCookie('csrftoken');
-        const csrfResponse = await axios.post('http://36.236.108.219:6001/csrf', {}, {
+        const csrfResponse = await axios.post(`${loginURL}/csrf`, {}, {
             headers: {
                 'X-CSRF-Token': csrfToken
             }
         });
 
         console.log("csrf response: " + csrfResponse);
-        const response = await axios.post('http://36.236.108.219:6001/login', {
+        const response = await axios.post(`${loginURL}/login`, {
             username: account,
             password: password
         });
@@ -39,7 +39,7 @@ const Login = () => {
         localStorage.setItem('token', token);
         
         console.log("token: " + token)
-        const protectedResponse = await axios.get('http://36.236.108.219:6001/protected', {
+        const protectedResponse = await axios.get(`${loginURL}/protected`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }

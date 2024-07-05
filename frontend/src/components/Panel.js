@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import "./Panel.css";
-import axios from 'axios';
+// import axios from 'axios';
 import {fetchDeviceData} from '../function/useAPI';
 
 const Panel = ({ selectedClient, selectedDeviceData, setSelectedDeviceData, deviceList }) => {
