@@ -3,7 +3,7 @@ const CryptoJS = require('crypto-js');
 function encrypt(text, secretKey) {
   return CryptoJS.AES.encrypt(text, secretKey).toString();
 }
-const Api=process.env.REACT_APP_API_URL
+const Api=process.env.REACT_APP_BACKEND_URL
 // 解密
 // function decrypt(ciphertext, secretKey) {
 //   const bytes  = CryptoJS.AES.decrypt(ciphertext, secretKey);

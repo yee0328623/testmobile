@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'; 
 import axios from 'axios';
-const loginURL= process.env.REACT_APP_LOGIN_URL;
+const loginURL= process.env.REACT_APP_BACKEND_URL;
 const getCookie = (name) => {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     
