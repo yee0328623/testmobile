@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import MapComponent from './MapComponent';
-import Panel from './Panel';
-import Navbar from './Navbar';
+import React, { useEffect, useState } from "react";
+import MapComponent from "./MapComponent";
+import Panel from "./Panel";
+import Navbar from "./Navbar";
 // import axios from 'axios';
 import "./MapPage.css";
-import '../index.css';
-import { fetchClients, fetchDeviceList } from '../function/useAPI';
+import "../index.css";
+import { fetchClients, fetchDeviceList } from "../function/useAPI";
 
 const MapPage = () => {
   const [selectedClient, setSelectedClient] = useState();
@@ -19,7 +19,7 @@ const MapPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const clientList = await fetchClients();
-      if(clientList){
+      if (clientList) {
         setClients(clientList);
         organizeClientsByCounty(clientList);
         if (clientList.length > 0) {
@@ -48,8 +48,8 @@ const MapPage = () => {
     }, {});
     setClientsByCounty(map);
   };
-  
-  const handleClientSelection =  async (clientName) => {
+
+  const handleClientSelection = async (clientName) => {
     const deviceListData = await fetchDeviceList(clientName);
     // const selectedClientData = clients.find(client => client.clientName === clientName);
     // console.log("clients", clients.find(client => client.clientName === clientName));
@@ -74,12 +74,28 @@ const MapPage = () => {
   return (
     <div>
       <section>
-        <Navbar isOpen={isOpen} toggleNavbar={toggleNavbar} handleClientSelection={handleClientSelection} clientsByCounty={clientsByCounty}/>
+        <Navbar
+          isOpen={isOpen}
+          toggleNavbar={toggleNavbar}
+          handleClientSelection={handleClientSelection}
+          clientsByCounty={clientsByCounty}
+        />
       </section>
       <section>
-        <div className='map-container'>
-          <MapComponent clients={clients} handleClientSelection={handleClientSelection} selectedClientLocation={selectedClientLocation} setSelectedClientLocation={setSelectedClientLocation} selectedClientData={selectedClientData} />
-          <Panel selectedClient={selectedClient} setSelectedDeviceData={setSelectedDeviceData} selectedDeviceData={selectedDeviceData} deviceList={deviceList.device_list || []}/>
+        <div className="map-container">
+          <MapComponent
+            clients={clients}
+            handleClientSelection={handleClientSelection}
+            selectedClientLocation={selectedClientLocation}
+            setSelectedClientLocation={setSelectedClientLocation}
+            selectedClientData={selectedClientData}
+          />
+          <Panel
+            selectedClient={selectedClient}
+            setSelectedDeviceData={setSelectedDeviceData}
+            selectedDeviceData={selectedDeviceData}
+            deviceList={deviceList.device_list || []}
+          />
         </div>
       </section>
     </div>
@@ -87,4 +103,3 @@ const MapPage = () => {
 };
 
 export default MapPage;
-  
