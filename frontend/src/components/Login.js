@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
-import axios from "axios";
-const loginURL = process.env.REACT_APP_BACKEND_URL;
-const getCookie = (name) => {
-  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-
-  if (match) {
-    // console.log("getting cookie", match[2]);
-    return match[2];
-  }
-  return "Cookie not found";
-};
+// import axios from "axios";
+import { onLogin } from "../function/LoginFun";
+// const loginURL = process.env.REACT_APP_LOGIN_URL;
 
 const Login = () => {
   const [account, setAccount] = useState("");
@@ -19,43 +11,7 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    try {
-      const csrfToken = getCookie("csrftoken");
-      const csrfResponse = await axios.post(
-        `${loginURL}/csrf`,
-        {},
-        {
-          headers: {
-            "X-CSRF-Token": csrfToken,
-          },
-        }
-      );
-
-      console.log("csrf response: " + csrfResponse);
-      const response = await axios.post(`${loginURL}/login`, {
-        username: account,
-        password: password,
-      });
-
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-
-      console.log("token: " + token);
-      const protectedResponse = await axios.get(`${loginURL}/protected`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setMessage("登入成功");
-    } catch (error) {
-      if (error.response) {
-        setMessage(error.response.data.message);
-      } else {
-        setMessage("登入失敗");
-      }
-    }
+    await onLogin(account, password, setMessage);
   };
 
   return (
