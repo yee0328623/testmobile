@@ -1,0 +1,92 @@
+/* sizing of map container */
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+/* Deafualt PopUp Customization */
+.leaflet-popup-content,
+.leaflet-popup-content p {
+  margin: 0;
+}
+.leaflet-popup-content-wrapper {
+  border: none;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  top: 5px;
+  right: 5px;
+  color: white;
+}
+.popup-container {
+  border-radius: 12px;
+  width: 13em;
+}
+
+.popup-content {
+  text-align: center;
+  padding: 1em;
+}
+
+.popup-content h3 {
+  margin: 0;
+}
+
+.popup-error {
+  border-top: solid 2.3em var(--color-red);
+}
+.popup-OK {
+  border-top: solid 2.3em var(--color-light-green);
+}
+.popup-disconnect {
+  border-top: solid 2.3em var(--color-black);
+}
+
+span.status-error {
+  color: var(--color-red);
+  margin: 0.5em;
+}
+
+span.status-OK {
+  color: var(--color-light-green);
+  margin: 0.5em;
+}
+span.status-disconnect {
+  color: var(--color-black);
+  margin: 0.5em;
+}
+
+/* Cluster Icon */
+.cluster-icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-25%, -25%);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Map Section */
+.map-container {
+  display: flex;
+}
+
+.map-section {
+  width: 100%;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .leaflet-container {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    flex-direction: column;
+  }
+}
